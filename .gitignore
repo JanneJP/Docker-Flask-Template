@@ -1,0 +1,7 @@
+__pycache__/
+.pytest_cache/
+.vscode/
+services/web/env/
+.env.prod
+.env.prod.db
+.flake8

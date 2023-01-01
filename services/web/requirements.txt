@@ -1,0 +1,6 @@
+flask
+flask-bootstrap
+Flask-SQLAlchemy
+gunicorn
+psycopg2-binary
+python-dotenv
