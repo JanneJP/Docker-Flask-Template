@@ -19,6 +19,29 @@ Nginx is used as a webserver
 - Docker
 - Postgresql
 
+## Setting up project with template
+
+Clone repository
+
+Create virtual env in services/web and activate it
+
+    python -m venv env
+
+Upgrade venv pip
+
+    pip install --upgrade pip
+
+Install pytest and flake8
+
+    pip install pytest
+    pip install flake8
+
+Install requirements
+
+    pip install -r requirements.txt
+
+create production .env files according to the example in project root
+
 ## TODO
 
 - Find out where the pytest database file is being created at
