@@ -10,38 +10,103 @@ Testing is handled with pytest, with the placeholder model testing included, aga
 
 Along with this, the project is meant to run on docker. A dev and production dockerfiles are included.
 
-Nginx is used as a webserver
+Traefik used as reverse proxy, and to handle TLS certs
 
 ## Tech
 
 - Python (Flask, SQLAlchemy)
-- Nginx
+- Traefik
 - Docker
 - Postgresql
 
-## Setting up project with template
+<hr>
 
-Clone repository
+## Development environment setup
 
-Create virtual env in services/web and activate it
+Create virtual environment in `services/web/` and activate it
 
     python -m venv env
 
-Upgrade venv pip
+    env/Scripts/activate
+
+Upgrade pip and install dependencies
 
     pip install --upgrade pip
 
-Install pytest and flake8
-
-    pip install pytest
-    pip install flake8
-
-Install requirements
-
     pip install -r requirements.txt
 
-create production .env files according to the example in project root
+Install pytest and run tests
 
-## TODO
+    pip install pytest
 
-- Find out where the pytest database file is being created at
+    pytest
+
+Verify local project works
+
+    python manage.py run
+
+Navigate to `127.0.0.1:5000`
+
+Verify docker project works
+
+    docker compose -f docker-compose.development.yml up
+
+Navigate to `web.localhost`
+
+Check that traefik dashboard works by navigating to `web.localhost:8080`
+
+<hr>
+
+## Testing environment setup
+
+Create `.env.db.testing` file according to `example.env.db.production` in `environments/`
+
+- `POSTGRES_USER` database user
+- `POSTGRES_PASSWORD` database user password
+- `POSTGRES_DB` database name
+
+Create `.env.testing` file according to `example.env.production` in `environments/`
+
+- `DATABASE_URL` edit in values from `.env.db.testing`
+
+Create a `traefik.testing.toml` configuration file according to `example.traefik.production.toml` in `services/traefik/`
+
+- In `[certificatesResolvers]`, change in your email adress for staging and production
+
+at project root with docker compose files, create a `.env` file according to `example.env`
+
+- `WEB_HOST` should be your domain name (localhost can be used for testing)
+
+Start testing environment
+
+    docker compose -f docker-compose.testing.yml up
+
+Navigate to `web.<WEB_HOST>`
+
+<hr>
+
+## Production environment setup
+
+Create `.env.db.production` file according to `example.env.db.production` in `environments/`
+
+- `POSTGRES_USER` database user
+- `POSTGRES_PASSWORD` database user password
+- `POSTGRES_DB` database name
+
+Create `.env.production` file according to `example.env.production` in `environments/`
+
+- `DATABASE_URL` edit in values from `.env.db.production`
+
+Create a `traefik.production.toml` configuration file according to `example.traefik.production.toml` in `services/traefik`
+
+- In `[certificatesResolvers]`, change in your email adress for staging and production
+
+at project root with docker compose files, create a `.env` file according to `example.env`
+
+- `WEB_HOST` should be your domain name
+
+Start production environment
+
+    docker compose -f docker-compose.production.yml up
+
+Navigate to `web.<WEB_HOST>`

@@ -14,7 +14,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.web.tls: true
-      traefik.http.routers.web.tls.certresolver: staging
+      traefik.http.routers.web.tls.certresolver: production
       traefik.http.routers.web.rule: Host(`web.${WEB_HOST}`)
     restart: unless-stopped
   traefik:
