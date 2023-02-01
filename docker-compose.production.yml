@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  web:
+    container_name: web
+    build:
+      context: ./services/web
+      dockerfile: Dockerfile.production
+    command: gunicorn --bind 0.0.0.0:5000 manage:app
+    expose:
+      - 5000
+    env_file:
+      - ./environments/.env.production
+    labels:
+      traefik.enable: true
+      traefik.http.routers.web.tls: true
+      traefik.http.routers.web.tls.certresolver: staging
+      traefik.http.routers.web.rule: Host(`web.${WEB_HOST}`)
+    restart: unless-stopped
+  traefik:
+    container_name: traefik
+    image: traefik:latest
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - "./services/traefik/traefik.production.toml:/etc/traefik/traefik.toml"
+      - "traefik_certs_production:/etc/traefik/certs/"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    restart: unless-stopped
+  db:
+    container_name: db
+    image: postgres:alpine
+    volumes:
+      - postgres_data_production:/var/lib/postgresql/data/
+    env_file:
+      - ./environments/.env.db.production
+    restart: unless-stopped
+
+volumes:
+  traefik_certs_production:
+  postgres_data_production:

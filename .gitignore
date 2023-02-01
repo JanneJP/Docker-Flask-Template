@@ -1,7 +1,13 @@
-__pycache__/
 .pytest_cache/
 .vscode/
+__pycache__/
 services/web/env/
-.env.prod
-.env.prod.db
+
 .flake8
+.env
+environments/.env.db.testing
+environments/.env.db.production
+environments/.env.testing
+environments/.env.production
+services/traefik/traefik.testing.toml
+services/traefik/traefik.production.toml

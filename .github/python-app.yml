@@ -1,0 +1,39 @@
+name: Test and lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.*') }}
+        restore-keys: | 
+          ${{ runner.os }}-pip-
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r ./services/web/requirements.txt
+    - name: Lint project
+      run: |
+        pip install flake8
+        flake8 --ignore= ./services/web/project/
+    - name: Run pytest
+      run: | 
+        pip install pytest
+        pytest ./services/web/
