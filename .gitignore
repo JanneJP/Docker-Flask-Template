@@ -2,6 +2,7 @@
 .vscode/
 __pycache__/
 services/web/env/
+services/web/instance/
 
 .flake8
 .env

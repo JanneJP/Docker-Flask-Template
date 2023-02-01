@@ -25,7 +25,7 @@ class TestingConfig(Config):
 
 
 class PytestConfig(TestingConfig):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////./pytest.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///pytest.db'
 
 
 class ProductionConfig(Config):
