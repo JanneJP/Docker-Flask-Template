@@ -1,5 +1,3 @@
-import os
-
 import pytest
 
 from project import create_app, db
@@ -20,5 +18,3 @@ def test_client():
             db.session.commit()
 
             yield testing_client
-
-    os.remove('instance/pytest.db')
