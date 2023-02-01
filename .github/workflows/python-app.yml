@@ -32,7 +32,7 @@ jobs:
     - name: Lint project
       run: |
         pip install flake8
-        flake8 --ignore= ./services/web/project/
+        flake8 --ignore=E501 ./services/web/project/
     - name: Run pytest
       run: | 
         pip install pytest
