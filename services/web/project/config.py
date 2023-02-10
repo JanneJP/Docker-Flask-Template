@@ -24,7 +24,9 @@ class TestingConfig(Config):
     TESTING = True
 
 
-class PytestConfig(TestingConfig):
+class PytestConfig(Config):
+    TESTING = True
+
     SQLALCHEMY_DATABASE_URI = 'sqlite:///pytest.db'
 
 

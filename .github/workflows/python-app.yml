@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - services/web
+      - services/web/**
   pull_request:
     branches:
       - main
     paths:
-      - services/web
+      - services/web/**
 
 permissions:
   contents: read
