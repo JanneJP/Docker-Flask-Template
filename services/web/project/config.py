@@ -42,7 +42,7 @@ def create_config(config_class=None):
         'production': ProductionConfig
     }
 
-    env_config = os.getenv('FLASK_ENV')
+    env_config = os.getenv('APP_ENV')
 
     config_class_name = config_class if config_class else env_config if env_config else 'development'
 

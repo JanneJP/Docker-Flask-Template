@@ -110,3 +110,17 @@ Start production environment
     docker compose -f docker-compose.production.yml up
 
 Navigate to `web.<WEB_HOST>`
+
+<hr>
+
+## Before pushing
+
+At repository root:
+
+Run tests
+
+    pytest -v ./services/web/
+
+Lint code
+
+    flake8 --ignore=E501 ./services/web/project/
